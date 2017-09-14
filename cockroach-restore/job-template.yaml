@@ -1,0 +1,121 @@
+apiVersion: v1
+kind: Template
+labels:
+  template: cockroach-restore
+metadata:
+  annotations:
+    description: CockroachDB to AWS S3 restore job
+    tags: db,restore,cockroachdb
+  name: cockroach-restore
+objects:
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    name: ${JOB_NAME}
+  spec:
+    parallelism: 1
+    completions: 1
+    activeDeadlineSeconds: ${DEADLINE_SECONDS}
+    template:
+      spec:
+        restartPolicy: OnFailure
+        volumes:
+        - name: backups
+          emptyDir: {}
+        containers:
+          - env:
+            - name: COCKROACH_DATABASE
+              value: ${COCKROACH_DATABASE}
+            - name: COCKROACH_HOST
+              value: ${COCKROACH_HOST}
+            - name: COCKROACH_PORT
+              value: ${COCKROACH_PORT}
+            - name: COCKROACH_USER
+              value: ${COCKROACH_USER}
+            - name: COCKROACH_PASSWORD
+              value: ${COCKROACH_PASSWORD}
+            - name: COCKROACH_EXTRA_FLAGS
+              value: ${COCKROACH_EXTRA_FLAGS}
+            - name: AWS_ACCESS_KEY_ID
+              value: ${AWS_ACCESS_KEY_ID}
+            - name: AWS_SECRET_ACCESS_KEY
+              value: ${AWS_SECRET_ACCESS_KEY}
+            - name: AWS_DEFAULT_REGION
+              value: ${AWS_DEFAULT_REGION}
+            - name: S3_BUCKET
+              value: ${S3_BUCKET}
+            - name: S3_PATH
+              value: ${S3_PATH}
+            - name: DROP_DATABASE
+              value: ${DROP_DATABASE}
+            - name: BACKUP_FILE_NAME
+              value: ${BACKUP_FILE_NAME}
+            name: ${JOB_NAME}
+            image: outtherelabs/cockroach-restore
+            volumeMounts:
+            - mountPath: /var/backups
+              name: backups
+parameters:
+- description: The name of the job
+  displayName: Name of the job
+  name: JOB_NAME
+  required: true
+- description: The time that this job has to run in seconds
+  displayName: Deadline Seconds
+  name: DEADLINE_SECONDS
+  required: true
+  value: "86400"
+- description: The name of the CockroachDB database
+  displayName: CockroachDB database
+  name: COCKROACH_DATABASE
+  required: true
+- description: The CockroachDB database host
+  displayName: CockroachDB host
+  name: COCKROACH_HOST
+  required: true
+- description: The CockroachDB database port
+  displayName: CockroachDB port
+  name: COCKROACH_PORT
+  required: true
+  value: '26257'
+- description: The CockroachDB user name
+  displayName: CockroachDB user name
+  name: COCKROACH_USER
+  required: true
+- description: The CockroachDB user password
+  displayName: CockroachDB user password
+  name: COCKROACH_PASSWORD
+  required: false
+- description: Extra CockroachDB backup cli config flags
+  displayName: CockroachDB backup extra config flags
+  name: COCKROACH_EXTRA_FLAGS
+  required: false
+- description: AWS access key for S3 storage
+  displayName: AWS access key
+  name: AWS_ACCESS_KEY_ID
+  required: false
+- description: AWS secret access key for S3 storage
+  displayName: AWS secret access key
+  name: AWS_SECRET_ACCESS_KEY
+  required: false
+- description: AWS default region for s3
+  displayName: AWS default region
+  name: AWS_DEFAULT_REGION
+  required: true
+  value: us-west-2
+- description: AWS s3 bucket name
+  displayName: AWS S3 bucket
+  name: S3_BUCKET
+  required: true
+- description: AWS s3 backup path within bucket
+  displayName: AWS S3 bucket path
+  name: S3_PATH
+  required: false
+- description: Whether or not to drop the database before restore
+  displayName: Drop Database
+  name: DROP_DATABASE
+  required: false
+- description: The name of the backup to use in S3.
+  displayName: Backup File Name
+  name: BACKUP_FILE_NAME
+  required: false
