@@ -15,7 +15,6 @@ $ docker run \
   -e COCKROACH_DATABASE=db_name \
   -e COCKROACH_USER=user \
   -e COCKROACH_HOST=localhost \
-  -e DROP_DATABASE=yes \
   outtherelabs/cockroach-backup
 ```
 
@@ -29,6 +28,5 @@ $ oc new-app -f https://raw.githubusercontent.com/OutThereLabs/cockroachdb-admin
   -p S3_BUCKET=bucket-name \
   -p COCKROACH_DATABASE=db_name \
   -p COCKROACH_USER=user \
-  -p COCKROACH_HOST=localhost \
-  -p DROP_DATABASE=yes
+  -p COCKROACH_HOST=localhost
 ```
