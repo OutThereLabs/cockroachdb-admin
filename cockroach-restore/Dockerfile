@@ -1,4 +1,4 @@
-FROM jatescher/cockroach:v1.1.0-beta.20170907
+FROM jatescher/cockroach:v1.1.0-beta.20170919
 
 MAINTAINER Julian Tescher "julian@outtherelabs.com"
 
