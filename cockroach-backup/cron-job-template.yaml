@@ -35,8 +35,6 @@ objects:
                 value: ${COCKROACH_PORT}
               - name: COCKROACH_USER
                 value: ${COCKROACH_USER}
-              - name: COCKROACH_PASSWORD
-                value: ${COCKROACH_PASSWORD}
               - name: COCKROACH_EXTRA_FLAGS
                 value: ${COCKROACH_EXTRA_FLAGS}
               - name: AWS_ACCESS_KEY_ID
@@ -86,10 +84,6 @@ parameters:
   displayName: CockroachDB user name
   name: COCKROACH_USER
   required: true
-- description: The CockroachDB user password
-  displayName: CockroachDB user password
-  name: COCKROACH_PASSWORD
-  required: false
 - description: Extra CockroachDB backup cli config flags
   displayName: CockroachDB backup extra config flags
   name: COCKROACH_EXTRA_FLAGS
