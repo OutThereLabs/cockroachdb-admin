@@ -114,7 +114,8 @@ parameters:
 - description: Whether or not to drop the database before restore
   displayName: Drop Database
   name: DROP_DATABASE
-  required: false
+  required: true
+  value: "no"
 - description: The name of the backup to use in S3.
   displayName: Backup File Name
   name: BACKUP_FILE_NAME
