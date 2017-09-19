@@ -118,4 +118,5 @@ parameters:
 - description: The name of the backup to use in S3.
   displayName: Backup File Name
   name: BACKUP_FILE_NAME
-  required: false
+  required: true
+  value: "latest"
