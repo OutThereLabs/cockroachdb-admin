@@ -49,7 +49,7 @@ gzip -d /var/backups/dump.sql.gz
 if [ "${DROP_DATABASE}" == "yes" ]; then
 	echo "Recreating database $COCKROACH_DATABASE"
     RE_CREATE_SQL="DROP DATABASE $COCKROACH_DATABASE CASCADE; CREATE DATABASE $COCKROACH_DATABASE;"
-    ./cockroach sql $COCKROACH_CONNECTION_OPTS $COCKROACH_EXTRA_FLAGS --execute=$RE_CREATE_SQL
+    ./cockroach sql --execute="$RE_CREATE_SQL" $COCKROACH_CONNECTION_OPTS $COCKROACH_EXTRA_FLAGS
 fi
 
 echo "Restoring ${BACKUP_FILE_NAME}"
