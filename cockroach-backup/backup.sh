@@ -31,11 +31,6 @@ if [ "${COCKROACH_USER}" = "**None**" ]; then
   exit 1
 fi
 
-if [ "${COCKROACH_PASSWORD}" = "**None**" ]; then
-  echo "You need to set the COCKROACH_PASSWORD environment variable."
-  exit 1
-fi
-
 COCKROACH_CONNECTION_OPTS="--host $COCKROACH_HOST --port $COCKROACH_PORT --user $COCKROACH_USER"
 
 echo "Creating dump of ${COCKROACH_DATABASE} database from ${COCKROACH_HOST}..."
