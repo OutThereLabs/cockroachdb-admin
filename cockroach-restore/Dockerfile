@@ -1,4 +1,4 @@
-FROM jatescher/cockroach:v1.1.0-rc.1
+FROM cockroachdb/cockroach:v1.1.0
 
 MAINTAINER Julian Tescher "julian@outtherelabs.com"
 
@@ -14,8 +14,6 @@ ENV COCKROACH_DATABASE=**None** \
     COCKROACH_PORT=26257 \
     COCKROACH_USER=**None** \
     COCKROACH_EXTRA_FLAGS='' \
-    AWS_ACCESS_KEY_ID=**None** \
-    AWS_SECRET_ACCESS_KEY=**None** \
     AWS_DEFAULT_REGION=us-west-2 \
     S3_BUCKET=**None** \
     S3_PATH='backups' \
