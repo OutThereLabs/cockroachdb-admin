@@ -2,6 +2,10 @@
 
 CockroachDB administration docker images and OpenShift templates.
 
+## WARNING
+
+These images do not yet work with proper certificate authentication. This project is not ready for production deployments.
+
 ## Backup to S3
 
 Docker image and OpenShift cron job to back up a CockroachDB database to S3.

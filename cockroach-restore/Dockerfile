@@ -1,4 +1,4 @@
-FROM cockroachdb/cockroach:v1.1.0
+FROM jatescher/cockroach:v1.2-alpha.20170901-859-g3542165-dirty
 
 MAINTAINER Julian Tescher "julian@outtherelabs.com"
 
